@@ -1,26 +1,14 @@
-/**
- * 
- * 
- * 
- * 
- * 
- * 기능들은 여기에 몰빵인가요 아님 세분화 하실껀가요
- * 일단 Iris Control 관련 기능들은 여기에 몰빵합니다.
- * 넹 그
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */
+////////////////////////// 해당 코드의 수정을 금함. ////////////////////////////
 
-/* 
- * 아래 코드는 Iris server 환경설정임
- * 수정 금지
+let IP, PORT;
+
+/**
+ * @param {Object} data {IP: String, PORT: Number}
  */
+function set(data) {
+  IP = data.IP
+  PORT = data.PORT
+}
 
 const ServerSocket = java.net.ServerSocket;
 const InputStream = java.io.InputStream;
@@ -30,8 +18,6 @@ const SocketException = java.net.SocketException;
 const Executors = java.util.concurrent.Executors;
 const TimeUnit = java.util.concurrent.TimeUnit;
 
-const IP = "192.168.0.120"; // iris 봇이 설치된 서버 IP
-const PORT = 3000; // 원하는 포트 번호
 const HTTP_OK = "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nConnection: close\r\n\r\n";
 const HTTP_BAD_REQUEST = "HTTP/1.1 400 Bad Request\r\nContent-Length: 0\r\nConnection: close\r\n\r\n";
 const HTTP_INTERNAL_ERROR = "HTTP/1.1 500 Internal Server Error\r\nContent-Length: 0\r\nConnection: close\r\n\r\n";
@@ -145,14 +131,13 @@ function _quoteBigIntIds(jsonText) {
         "src_logId", "src_userId",
         "user_id", "chat_id", "id", "prev_id", "client_message_id",
         "src_id", "msg_id"
-    ];
+    ]; 
     const pattern = new RegExp(
         `"(${ID_KEYS.join("|")})"\\s*:\\s*(-?\\d{15,})(?=\\s*[,}\\]])`,
         "g"
     );
     return jsonText.replace(pattern, (_match, key, num) => `"${key}": "${num}"`);
 }
-
 
 /** @description 메인 서버 루프 */
 function run() {
