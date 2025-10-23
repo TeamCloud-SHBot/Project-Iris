@@ -5,21 +5,21 @@
 
 ## 서버단 (TeamCloud)
 
-### 1. IrisRhino 모듈화
+### 1. IrisRhino 모듈화 (IrisControl.js)
   - IrisRhino 관련 기능들을 별도의 모듈로 분리. V
   - IrisRhino 모듈은 IrisRhino의 메시지 불러오기 및 전송을 포함함.
   - IrisConverter 구현.
   - IrisRhino 모듈은 독립적으로 테스트 가능하도록 설계.
 
 
-### 2. 서형봇에서 발생한 문제(오류) 해결
+### 2. 서형봇에서 발생한 문제(오류) 해결 (IrisControl.js)
   - Iris server에서 넘어오는 정보 중 attachhment 내의 userId 값 등의 일부 데이터 손실 ex. attachment>mentions>user_id
     
 
 
 ## 유저단 (SHBot)
 
-### 1. 
+### 1. (Iris-API2_ex.js)
   - 각 이벤트(입/퇴장, 메세지 등) 리스너 분리 -> DBm 스타일 유지 or 함수 분리
     - join, leave, profile_change, Membertype_change 등
   - Iris control 설정의 IP, PORT, Endpoint는 실제 유저가 만들 스크립트에서 직접 받아오는 방식으로 구현

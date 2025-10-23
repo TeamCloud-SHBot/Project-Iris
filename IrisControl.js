@@ -10,6 +10,10 @@ function set(data) {
   PORT = data.PORT
 }
 
+function on(name, func) {
+  
+}
+
 const ServerSocket = java.net.ServerSocket;
 const InputStream = java.io.InputStream;
 const ByteArrayOutputStream = java.io.ByteArrayOutputStream;
