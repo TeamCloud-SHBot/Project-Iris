@@ -11,7 +11,7 @@ function set(data) {
 }
 
 function on(name, func) {
-  
+
 }
 
 const ServerSocket = java.net.ServerSocket;
@@ -130,18 +130,26 @@ function readLineBytes(inStream) {
  * @description attachment JSON 문자열 내 큰 정수 ID 키를 문자열로 강제 
  */
 function _quoteBigIntIds(jsonText) {
-    // 키 목록 (필요 시 확장)
-    const ID_KEYS = [
-        "src_logId", "src_userId",
-        "user_id", "chat_id", "id", "prev_id", "client_message_id",
-        "src_id", "msg_id"
-    ]; 
-    const pattern = new RegExp(
-        `"(${ID_KEYS.join("|")})"\\s*:\\s*(-?\\d{15,})(?=\\s*[,}\\]])`,
-        "g"
-    );
-    return jsonText.replace(pattern, (_match, key, num) => `"${key}": "${num}"`);
+  // 키 목록 (필요 시 확장)
+  const ID_KEYS = [
+    "src_logId", "src_userId",
+    "user_id", "chat_id", "id", "prev_id", "client_message_id",
+    "src_id", "msg_id"
+  ];
+  const pattern = new RegExp(
+    `"(${ID_KEYS.join("|")})"\\s*:\\s*(-?\\d{15,})(?=\\s*[,}\\]])`,
+    "g"
+  );
+  return jsonText.replace(pattern, (_match, key, num) => `"${key}": "${num}"`);
 }
+
+
+function onMessage(data) {
+
+  
+
+}
+
 
 /** @description 메인 서버 루프 */
 function run() {
@@ -220,7 +228,7 @@ function run() {
               let data = {};
               if (bodyJS.length > 0) {
                 try {
-                  data = JSON.parse(bodyJS); 
+                  data = JSON.parse(bodyJS);
                 } catch (e) {
                   Logger.e(_SCRIPT_NAME, e);
                   sendHttpResponse(client, outStream, HTTP_BAD_REQUEST);
@@ -229,30 +237,36 @@ function run() {
                 if (typeof data.msg === "string") {
                   try {
                     data.msg = JSON.parse(data.msg);
-                  } catch (_) { }
+                  } catch (_) {}
                 }
                 // 중첩 JSON 파싱
                 if (typeof data.msg === "string") {
-                    try { data.msg = JSON.parse(data.msg); } catch (_) {}
+                  try {
+                    data.msg = JSON.parse(data.msg);
+                  } catch (_) {}
                 }
                 if (data.json) {
                   ["message", "attachment", "v"].forEach((field) => {
                     let val = data.json[field];
                     if (typeof val === "string") {
                       try {
-                          if (field === "attachment") {
-                            val = _quoteBigIntIds(val);
-                          }
-                          data.json[field] = JSON.parse(val);
-                      } catch (_) { /* 파싱 실패 시 원본 유지 */ }
+                        if (field === "attachment") {
+                          val = _quoteBigIntIds(val);
+                        }
+                        data.json[field] = JSON.parse(val);
+                      } catch (_) {
+                        /* 파싱 실패 시 원본 유지 */
+                      }
                     }
                   });
                 }
               }
 
-              if (isMessage) {
+
+              if (isMessage) { //수신이 되었을 때
                 try {
                   onMessage(data); // 사용자 정의 함수 호출, 필요에 따라 수정
+                  // 해당 data 객체 구조는 카톡에서 보냈던 걸 참고해주세요.
                   Log.i(`스레드: ${threadName}\n\n받은 데이터:\n${data.length > 0 ? JSON.stringify(data, null, 2) : "Empty body"}`);
                 } catch (e) {
                   Log.e(`onMessage 함수 오류: ${e.name}\n${e.message}\n${e.stack}`);
@@ -261,6 +275,9 @@ function run() {
               }
 
               if (isSend) {
+                // data.type: ["text", "image", "multiImage"]
+                // data.room: 방 아이디
+                // data.data: 메시지 또는 Base64 문자열
                 let ok = send(data.type, data.room, data.data);
                 Log.i(`스레드: ${threadName}\n\n보낸 데이터:\n${bodyJS.length > 0 ? JSON.stringify(data, null, 2) : "Empty body"}\n\n결과: ${ok}`);
                 return sendHttpResponse(client, outStream, ok ? HTTP_OK : HTTP_INTERNAL_ERROR);
@@ -269,7 +286,7 @@ function run() {
               Log.e(`클라이언트 핸들러 오류: ${e.name}\n${e.message}\n${e.stack}`);
               try {
                 sendHttpResponse(client, client.getOutputStream(), HTTP_INTERNAL_ERROR);
-              } catch (_) { }
+              } catch (_) {}
             } finally {
               try {
                 if (client && !client.isClosed()) client.close();
@@ -301,6 +318,7 @@ function run() {
     Log.i("서버 종료됨");
   }
 }
+
 
 // 서버 실행
 let serverThread = new java.lang.Thread(new java.lang.Runnable({
