@@ -144,11 +144,89 @@ function _quoteBigIntIds(jsonText) {
 }
 
 
+
 function onMessage(data) {
 
-  
+  let chat = convertChat(data, req_user(data.json.user_id));
+
+
+  if (chat.text === "ping") {
+    send("text", chat.channel.id, "pong");
+  }
 
 }
+
+
+function req_user(user_id) {
+
+  let url = `http://${IP}:3000/query`
+  let query = `SELECT * FROM open_chat_member WHERE user_id = ${user_id}`
+  let result;
+
+  try {
+
+    result = org.jsoup.Jsoup.connect(url)
+      .requestBody(JSON.stringify({
+        query: query,
+        bind: []
+      }))
+      .ignoreContentType(true)
+      .method(org.jsoup.Connection.Method.POST)
+      .execute().body();
+    result = JSON.parse(result).data[0];
+
+  } catch (e) {
+    result = e;
+  }
+
+  return result;
+}
+
+
+function convertChat(data, userInfo) {
+
+  //data.json.user_id
+
+  let result = {
+
+    text: data.msg,
+    type: data.json.type || null,
+    feedType: data.msg.feedType || null,
+
+    user: {
+
+      name: userInfo.name,
+      id: String(userInfo.user_id),
+      member_type: userInfo.member_type,
+      profile_type: userInfo.profile_type,
+      raw: userInfo,
+
+    },
+
+    channel: {
+      id: data.json.chat_id,
+      name: data.room
+    },
+
+    chat_id: data.json.chat_id,
+    prev_id: data.json.prev_id,
+
+    attachment: data.json.attachment,
+
+    //created_at: data.json.created_at, // string -> Number ?
+    //deleted_at: data.json.deleted_at, // string -> Number ?
+
+    isMine: data.json.v.isMine,
+
+    raw: data,
+
+
+  }
+
+  return result;
+
+}
+
 
 
 /** @description 메인 서버 루프 */

@@ -7,9 +7,11 @@
 
 ### 1. IrisRhino 모듈화 (IrisControl.js)
   - IrisRhino 관련 기능들을 별도의 모듈로 분리. V
-  - IrisRhino 모듈은 IrisRhino의 메시지 불러오기 및 전송을 포함함.
-  - IrisConverter 구현.
-  - IrisRhino 모듈은 독립적으로 테스트 가능하도록 설계.
+  - IrisRhino 모듈은 IrisRhino의 메시지 불러오기 및 전송을 포함함. V
+  - IrisConverter 구현. V
+  - IrisRhino 모듈은 독립적으로 테스트 가능하도록 설계. V
+  - IrisControl#242 수정해야 함. ( @momttom2 님이 정리하신 것을 사용함.)
+  - shbot_script > utils.js 를 참고하여 user 및 channel 객체 가져오기. ( @momttom2 님이 정리하신 것을 토대로 가져옴.)
 
 
 ### 2. 서형봇에서 발생한 문제(오류) 해결 (IrisControl.js)

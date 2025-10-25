@@ -1,19 +1,24 @@
 const IrisControl = require("IrisControl");
 
+const IrisManager = IrisControl.set({IP: "127.0.0.1", PORT: 3000});
 
-IrisControl.set({IP: "", PORT: 3000})
+IrisManager.on("message", function (chat, channel){
+    Log.i(`메시지 받음: ${chat.text} in ${channel.id}`);
+});
 
-  exports.Iris = {
-    createConnection: function (IP, PORT, ...etc){
-        return "대충 아이리스 메니저"
-    }
-}
+IrisManager.on("join", function (chat, channel){
+    Log.i(`입장 이벤트: ${chat.user_id} in ${channel.id}`);
+});
 
-IrisManager.on("message", function (chat, channel){})
-IrisManager.on("join", function (chat, channel){})
-IrisManager.on("leave", function (chat, channel){})
-IrisManager.on("all" /**모든 피드 반응*/, function (chat, channel){})
+IrisManager.on("leave", function (chat, channel){
+    Log.i(`퇴장 이벤트: ${chat.user_id} from ${channel.id}`);
+});
 
-IrisManager.start()
-IrisManager.stop()
+IrisManager.on("all" /**모든 피드 반응*/, function (chat, channel){
+    Log.d(`모든 피드 반응: ${channel.id}`);
+});
 
+
+IrisManager.start();
+
+IrisManager.stop();
