@@ -8,7 +8,10 @@ var TimeUnit = java.util.concurrent.TimeUnit;
 var ByteArrayOutputStream = java.io.ByteArrayOutputStream;
 var StandardCharsets = java.nio.charset.StandardCharsets;
 
-var globalConfig = { IP: null, PORT: null };
+var globalConfig = {
+  IP: null,
+  PORT: null
+};
 var HTTP = {
   Ok: "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
   BadRequest: "HTTP/1.1 400 Bad Request\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
@@ -24,7 +27,8 @@ var HTTP = {
  */
 function readLine(inputStream) {
   var buf = new ByteArrayOutputStream();
-  var prev = -1, curr;
+  var prev = -1,
+    curr;
 
   try {
     while ((curr = inputStream.read()) != -1) {
@@ -61,7 +65,9 @@ function quoteBigIntIds(text) {
     "src_id", "msg_id"
   ];
   var pattern = new RegExp('"' + ID_KEYS.join("|") + '"\\s*:\\s*(-?\\d{15,})(?=\\s*[,}\\]])', "g");
-  return text.replace(pattern, function(_m, key, num) { return '"' + key + '": "' + num + '"'; });
+  return text.replace(pattern, function (_m, key, num) {
+    return '"' + key + '": "' + num + '"';
+  });
 }
 
 /**
@@ -84,7 +90,7 @@ function sendHttpResponse(socket, out, responseText) {
  */
 function sendMessage(IP, type, roomId, data) {
   try {
-    org.jsoup.Jsoup.connect("http://" + IP + ":3000/reply")
+    org.jsoup.Jsoup.connect(`http://"${IP}:3000/reply`)
       .header("Content-Type", "application/json")
       .requestBody(JSON.stringify({
         type: type,
@@ -107,7 +113,8 @@ function sendMessage(IP, type, roomId, data) {
  */
 function readHeaders(inputStream) {
   var headers = {};
-  var len = 0, hb;
+  var len = 0,
+    hb;
 
   while ((hb = readLine(inputStream)) !== null) {
     if (hb.length <= 2) break; // 빈 라인: 헤더 종료
@@ -123,7 +130,10 @@ function readHeaders(inputStream) {
       }
     }
   }
-  return { headers: headers, contentLength: len };
+  return {
+    headers: headers,
+    contentLength: len
+  };
 }
 
 /**
@@ -131,10 +141,11 @@ function readHeaders(inputStream) {
  */
 function readBody(inputStream, contentLength) {
   if (!contentLength || contentLength <= 0) return null;
-  
+
   var buf = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, contentLength);
-  var total = 0, readn = 0;
-  
+  var total = 0,
+    readn = 0;
+
   try {
     while (total < contentLength) {
       readn = inputStream.read(buf, total, contentLength - total);
@@ -145,7 +156,7 @@ function readBody(inputStream, contentLength) {
     Log.e("IrisControl", "본문 읽기 중 오류 발생: " + e.message + " ( " + e.stack + " )");
     return null;
   }
-  
+
   if (total !== contentLength) return null;
   return String(new java.lang.String(buf, StandardCharsets.UTF_8));
 }
@@ -174,7 +185,7 @@ function nestedJson(data) {
   }
 
   if (data.json && typeof data.json === "object") {
-    ["message", "attachment", "v"].forEach(function(field) {
+    ["message", "attachment", "v"].forEach(function (field) {
       var val = data.json[field];
       if (typeof val === "string") {
         var src = val;
@@ -185,6 +196,94 @@ function nestedJson(data) {
   }
   return data;
 }
+
+////////////////////////////////////////
+//// ChatManager 생성자 및 프로토타입 ////
+////////////////////////////////////////
+
+/**
+ * @constructor
+ * @description 수신된 메시지 데이터 관리
+ */
+function ChatManager(IP, data) {
+  this.IP = IP;
+  this.data = data;
+  this.userID = data.json.user_id;
+}
+
+/**
+ * @description 사용자 정보 조회
+ */
+ChatManager.prototype.getUserInfo = function (userID) {
+  if (!userID) return null;
+  let result = null;
+  try {
+    result = org.jsoup.Jsoup.connect(`http://${this.IP}:3000/query`)
+      .header("Content-Type", "application/json")
+      .requestBody(JSON.stringify({
+        query: `SELECT * FROM open_chat_member WHERE user_id = ${userID}`,
+        bind: []
+      }))
+      .ignoreContentType(true)
+      .method(org.jsoup.Connection.Method.POST)
+      .execute().body();
+  } catch (e) {
+    Log.e("IrisControl", "사용자 정보 조회 중 오류 발생: " + e.message + " ( " + e.stack + " )");
+    return null;
+  }
+  return JSON.parse(result).data[0];
+}
+
+/** 
+ * @description 채널 정보 조회
+ */
+ChatManager.prototype.getChannelInfo = function (channelID) {
+  if (!channelID) return null;
+  let result = null;
+  try {
+    result = org.jsoup.Jsoup.connect(`http://${this.IP}:3000/query`)
+      .header("Content-Type", "application/json")
+      .requestBody(JSON.stringify({
+        query: `SELECT * FROM chat_rooms WHERE id = ${channelID}`,
+        bind: []
+      }))
+      .ignoreContentType(true)
+      .method(org.jsoup.Connection.Method.POST)
+      .execute().body();
+  } catch (e) {
+    Log.e("IrisControl", "채널 정보 조회 중 오류 발생: " + e.message + " ( " + e.stack + " )");
+    return null;
+  }
+  return JSON.parse(result).data[0];
+}
+
+/**
+ * @description 메시지 정보 조회
+ */
+ChatManager.prototype.getMessageInfo = function (messageID) {
+  if (!messageID) return null;
+  let result = null;
+  try {
+    result = org.jsoup.Jsoup.connect(`http://${this.IP}:3000/query`)
+      .header("Content-Type", "application/json")
+      .requestBody(JSON.stringify({
+        query: `SELECT * FROM chat_logs WHERE id = ${messageID}`,
+        bind: []
+      }))
+      .ignoreContentType(true)
+      .method(org.jsoup.Connection.Method.POST)
+      .execute().body();
+  } catch (e) {
+    Log.e("IrisControl", "메시지 정보 조회 중 오류 발생: " + e.message + " ( " + e.stack + " )");
+    return null;
+  }
+  return JSON.parse(result).data[0];
+}
+
+
+
+
+
 
 ////////////////////////////////////////
 //// IrisManager 생성자 및 프로토타입 ////
@@ -204,67 +303,111 @@ function IrisManager(IP, PORT) {
     "message": [],
     "join": [],
     "leave": [],
+    "kick": [],
+    "delete": [],
+    "hide": [],
     "all": []
   };
+  this.data = null;
+  this.ChatManager = new ChatManager(IP, this.data);
 }
 
 /**
  * @description 이벤트 리스너 등록
  */
-IrisManager.prototype.on = function(event, callback) {
-  if (this.listeners[event] && typeof callback === "function") {
-    this.listeners[event].push(callback);
-    Log.i("IrisManager", "이벤트 리스너 등록됨: " + event);
+IrisManager.prototype.on = function (eventName, callback) {
+  if (this.listeners[eventName] && typeof callback === "function") {
+    this.listeners[eventName].push(callback);
+    Log.i("IrisManager", "이벤트 리스너 등록됨: " + eventName);
   } else {
-    Log.e("IrisManager", "알 수 없는 이벤트 또는 콜백 오류: " + event);
+    Log.e("IrisManager", "알 수 없는 이벤트 또는 콜백 오류: " + eventName);
   }
 };
 
 /**
  * @description 등록된 이벤트 리스너 호출
  */
-IrisManager.prototype.emit = function(event, chat, channel) {
-  var data = [chat, channel]; // 인자를 배열로 만들어 apply 사용
-  if (this.listeners[event]) {
-    this.listeners[event].forEach(function(callback) {
+IrisManager.prototype.emit = function (eventName, event) {
+  if (this.listeners[eventName]) {
+    this.listeners[eventName].forEach(function (callback) {
       try {
-        callback.apply(null, data);
+        callback.call(null, event);
       } catch (e) {
-        Log.e("IrisManager", "이벤트(" + event + ") 콜백 오류: " + e.name + "\n" + e.message + "\n" + e.stack);
+        Log.e("IrisManager", "이벤트(" + eventName + ") 콜백 오류: " + e.name + "\n" + e.message + "\n" + e.stack);
       }
     });
   }
 };
 
 /**
+ * 
+ * 메시지 타입 (data.json.type)
+ * - 0: 피드
+ * - 1: 문자
+ * - 2: 사진
+ * - 3: 동영상
+ * - 26: 답장
+ * - 27: 사진 묶어보내기
+ */
+/**
+ * 피드 타입 (data.json.message.feedType)
+ * - 2: 퇴장
+ * - 4: 입장
+ * - 6: 강퇴
+ * - 14: 메시지 삭제
+ * - 26: 메시지 가리기
+ * - 27: 관리자만 말하기
+ */
+/**
  * @description 데이터 타입에 따라 이벤트 발송
  */
-IrisManager.prototype.processMessage = function(data) {
-    if (!data) return;
+IrisManager.prototype.processMessage = function (data) {
+  if (!data) return;
 
-    var chat = data.chat;
-    var channel = data.room;
-    
-    // 1. "all" 이벤트 (모든 피드 반응)
-    this.emit("all", chat, channel);
+  let event = {
+    user: this.ChatManager.getUserInfo(data.json.user_id),
+    channel: this.ChatManager.getChannelInfo(data.json.chat_id),
+    message: this.ChatManager.getMessageInfo(data.json.msg_id),
+  };
 
-    // 2. 메시지/조인/퇴장 이벤트 분기 (가정된 로직)
-    var isJoin = data.type === "join" || (data.json && data.json.type === "join");
-    var isLeave = data.type === "leave" || (data.json && data.json.type === "leave");
+  this.emit("all", event);
 
-    if (isJoin) {
-        this.emit("join", chat, channel);
-    } else if (isLeave) {
-        this.emit("leave", chat, channel);
-    } else {
-        this.emit("message", chat, channel);
-    }
+  switch (data.json.type) {
+    case "0": // 피드
+      switch (data.json.message.feedType) {
+        case 4: // 입장
+          this.emit("join", event);
+          break;
+        case 2: // 퇴장
+          this.emit("leave", event);
+          break;
+        case 6: // 강퇴
+          this.emit("kick", event);
+          break;
+        case 14: // 메시지 삭제
+          this.emit("delete", event);
+          break;
+        case 26: // 메시지 가리기
+          this.emit("hide", event);
+          break;
+        default:
+          // 기타 피드 이벤트 무시
+          break;
+      }
+      break;
+    case "1": // 문자
+      this.emit("message", event);
+      break;
+    default:
+      // 기타 타입 무시
+      break;
+  }
 };
 
 /**
  * @description 서버 종료
  */
-IrisManager.prototype.stop = function() {
+IrisManager.prototype.stop = function () {
   this.running = false;
   var self = this;
 
@@ -293,7 +436,7 @@ IrisManager.prototype.stop = function() {
 /**
  * @description 서버 메인 루프 실행
  */
-IrisManager.prototype.run = function() {
+IrisManager.prototype.run = function () {
   var self = this;
   this.executorService = Executors.newCachedThreadPool();
   this.running = true;
@@ -310,7 +453,7 @@ IrisManager.prototype.run = function() {
         var client = socket;
 
         this.executorService.submit(new java.lang.Runnable({
-          run: function() {
+          run: function () {
             var threadName = "IrisControl-Client-" + java.lang.Thread.currentThread().getName();
 
             try {
@@ -336,12 +479,14 @@ IrisManager.prototype.run = function() {
 
               var data = safeJsonParse(body, null);
               if (!data) return sendHttpResponse(client, outStream, HTTP.BadRequest);
-              
+
               data = nestedJson(data);
+              _data = data;
 
               if (isMessage) {
                 try {
                   self.processMessage(data); // 이벤트 시스템 호출
+                  self.data = data;
                   Log.i("IrisControl", "스레드: " + threadName + "\n\n받은 데이터:\n" + (Object.keys(data).length > 0 ? JSON.stringify(data, null, 2) : "Empty body"));
                 } catch (e) {
                   Log.e("IrisControl", "processMessage 함수 오류: " + e.name + "\n" + e.message + "\n" + e.stack);
@@ -391,15 +536,17 @@ IrisManager.prototype.run = function() {
 /**
  * @description 서버를 시작하는 함수
  */
-IrisManager.prototype.start = function() {
+IrisManager.prototype.start = function () {
   if (this.running) {
     Log.i("IrisControl", "이미 서버가 실행 중입니다.");
     return;
   }
-  
+
   var self = this;
-  var serverThread = new java.lang.Thread(new java.lang.Runnable({ 
-    run: function() { self.run(); } 
+  var serverThread = new java.lang.Thread(new java.lang.Runnable({
+    run: function () {
+      self.run();
+    }
   }));
   serverThread.setName("IrisControlServerThread");
   serverThread.start();
@@ -422,6 +569,5 @@ function set(config) {
 
 
 module.exports = {
-  set: set,
-  createConnection: createConnection
+  set: set
 };

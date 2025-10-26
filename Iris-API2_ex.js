@@ -20,5 +20,5 @@ IrisManager.on("all" /**모든 피드 반응*/, function (chat, channel){
 
 
 IrisManager.start();
-
-IrisManager.stop();
+// 종료 예시 (필요시 호출)
+// IrisManager.stop();

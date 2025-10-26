@@ -10,12 +10,8 @@
   - IrisRhino 모듈은 IrisRhino의 메시지 불러오기 및 전송을 포함함. V
   - IrisConverter 구현. V
   - IrisRhino 모듈은 독립적으로 테스트 가능하도록 설계. V
-  - IrisControl#242 수정해야 함. ( @momttom2 님이 정리하신 것을 사용함.)
-  - shbot_script > utils.js 를 참고하여 user 및 channel 객체 가져오기. ( @momttom2 님이 정리하신 것을 토대로 가져옴.)
-
-
-### 2. 서형봇에서 발생한 문제(오류) 해결 (IrisControl.js)
-  - Iris server에서 넘어오는 정보 중 attachhment 내의 userId 값 등의 일부 데이터 손실 ex. attachment>mentions>user_id
+  - IrisControl#242 수정해야 함.
+  - shbot_script > utils.js 를 참고하여 user 및 channel 객체 가져오기.
     
 
 

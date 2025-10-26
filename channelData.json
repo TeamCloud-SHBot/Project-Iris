@@ -1,0 +1,124 @@
+{
+  "_id": "16",
+  "id": "",
+  "type": "OM",
+  "link_id": "",
+  "unread_count": "3",
+  "active_members_count": "6",
+  "last_message": "",
+  "last_read_log_id": "",
+  "last_log_id": "",
+  "last_joined_log_id": "",
+  "last_chat_log_type": "1",
+  "last_updated_at": "",
+  "temporary_message": {
+    "message": "",
+    "mentions": []
+  },
+  "active_member_ids": [
+
+  ],
+  "members": [
+
+  ],
+  "watermarks": [
+  ],
+  "meta": [
+    {
+      "type": 1,
+      "revision": ,
+      "content": "",
+      "authorId": ,
+      "updatedAt": ,
+      "neverShowAgain": false,
+      "iconMode": false
+    },
+    {
+      "type": 14,
+      "revision": ,
+      "content": {
+        "full": [
+          {
+            "id": "",
+            "name": "",
+            "updatedAt": ,
+            "botId": 
+          },
+          {
+            "id": "",
+            "name": "",
+            "updatedAt": ,
+            "botId": 
+          }
+        ]
+      }
+    },
+    {
+      "type": 16,
+      "revision": ,
+      "content": {
+        "liveon": false,
+        "title": "",
+        "updateTime": ,
+        "startTime": ,
+        "csIP": "211.249.203.217",
+        "csIP6": "",
+        "csPort": ,
+        "callId": ,
+        "url": "",
+        "blind": false
+      },
+      "authorId": 
+    },
+    {
+      "type": 17,
+      "revision": ,
+      "content": { "count": 0 }
+    }
+  ],
+  "moim_meta": [
+    {
+      "t": 1,
+      "ur": ,
+      "br": ,
+      "ct": {
+        "id": "",
+        "owner_id": ,
+        "type": "TEXT",
+        "created_at": "2025-10-11T14:34:57.000Z",
+        "revision": ,
+        "notice": true,
+        "content": "",
+        "json_content": [
+          {
+            "type": "text",
+            "text": ""
+          }
+        ]
+      },
+      "neverShowAgain": false,
+      "iconMode": false,
+      "isNew": true
+    }
+  ],
+  "v": {
+    "display_user_ids": ", , , , ",
+    "origin": "",
+    "token": ,
+    "log_meta_synced_revision": ,
+    "last_checked_unread_mention": ,
+    "first_entry": false,
+    "enc": 31,
+    "inviterId": 0
+  },
+  "is_hint": "0",
+  "mute_until_at": null,
+  "private_meta": null,
+  "ext": null,
+  "invite_info": null,
+  "last_pk_tokens": null,
+  "schat_token": null,
+  "blinded_member_ids": null,
+  "last_update_seen_id": "",
+  "last_skey_token": null
+}

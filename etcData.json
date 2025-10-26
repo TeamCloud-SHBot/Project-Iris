@@ -1,0 +1,250 @@
+[{
+  "msg": "message",
+  "room": "",
+  "sender": "",
+  "json": {
+    "_id": "",
+    "id": "",
+    "type": "1",
+    "chat_id": "",
+    "user_id": "",
+    "message": "message",
+    "attachment": {},
+    "created_at": "",
+    "deleted_at": "0",
+    "client_message_id": "",
+    "prev_id": "",
+    "referer": "0",
+    "supplement": null,
+    "v": {
+      "notDecoded": false,
+      "origin": "MSG",
+      "c": "10-26 12:31:08",
+      "modifyRevision": 0,
+      "isSingleDefaultEmoticon": false,
+      "defaultEmoticonsCount": 0,
+      "isMine": false,
+      "enc": 31
+    },
+    "thread_id": null,
+    "scope": null
+  }
+}, {
+  "msg": "",
+  "room": "",
+  "sender": "",
+  "json": {
+    "_id": "",
+    "id": "",
+    "type": "2",
+    "chat_id": "",
+    "user_id": "",
+    "message": "사진",
+    "attachment": {
+      "thumbnailUrl": "",
+      "thumbnailHeight": 120,
+      "thumbnailWidth": 120,
+      "url": "",
+      "k": "",
+      "cs": "",
+      "s": 10490,
+      "w": 1014,
+      "h": 1014,
+      "expire": ,
+      "mt": "image/png",
+      "cmt": ""
+    },
+    "created_at": "",
+    "deleted_at": "0",
+    "client_message_id": "",
+    "prev_id": "",
+    "referer": "0",
+    "supplement": null,
+    "v": {
+      "notDecoded": false,
+      "origin": "MSG",
+      "c": "10-26 12:31:52",
+      "modifyRevision": 0,
+      "isSingleDefaultEmoticon": false,
+      "defaultEmoticonsCount": 0,
+      "isMine": false,
+      "enc": 31
+    },
+    "thread_id": null,
+    "scope": null
+  }
+}, {
+  "msg": {
+    "feedType": 14,
+    "logId": ,
+    "hidden": true
+  },
+  "room": "",
+  "sender": "",
+  "json": {
+    "_id": "7871",
+    "id": "",
+    "type": "0",
+    "chat_id": "",
+    "user_id": "",
+    "message": {
+      "feedType": 14,
+      "logId": ,
+      "hidden": true
+    },
+    "attachment": {},
+    "created_at": "",
+    "deleted_at": "",
+    "client_message_id": "0",
+    "prev_id": "",
+    "referer": "0",
+    "supplement": null,
+    "v": {
+      "notDecoded": false,
+      "origin": "SYNCDLMSG",
+      "c": "10-26 12:32:08",
+      "modifyRevision": 0,
+      "isSingleDefaultEmoticon": false,
+      "defaultEmoticonsCount": 0,
+      "isMine": false,
+      "enc": 31
+    },
+    "thread_id": null,
+    "scope": null
+  }
+}, {
+  "msg": {
+    "feedType": 26,
+    "coverType": "openchat_blind",
+    "hidden": false,
+    "chatLogInfos": [{
+      "logId": ,
+      "type": 1
+    }],
+    "logId": 
+  },
+  "room": "",
+  "sender": "",
+  "json": {
+    "_id": "",
+    "id": "",
+    "type": "0",
+    "chat_id": "",
+    "user_id": "",
+    "message": {
+      "feedType": 26,
+      "coverType": "openchat_blind",
+      "hidden": false,
+      "chatLogInfos": [{
+        "logId": ,
+        "type": 1
+      }],
+      "logId": 
+    },
+    "attachment": {},
+    "created_at": "",
+    "deleted_at": "0",
+    "client_message_id": "0",
+    "prev_id": "",
+    "referer": "0",
+    "supplement": null,
+    "v": {
+      "notDecoded": false,
+      "origin": "SYNCREWR",
+      "c": "10-26 12:32:17",
+      "modifyRevision": 0,
+      "isSingleDefaultEmoticon": false,
+      "defaultEmoticonsCount": 0,
+      "isMine": false,
+      "enc": 31
+    },
+    "thread_id": null,
+    "scope": null
+  }
+}, {
+  "msg": {
+    "feedType": 4,
+    "members": [{
+      "userId": ,
+      "nickName": ""
+    }]
+  },
+  "room": "",
+  "sender": "",
+  "json": {
+    "_id": "",
+    "id": "",
+    "type": "0",
+    "chat_id": "",
+    "user_id": "",
+    "message": {
+      "feedType": 4,
+      "members": [{
+        "userId": ,
+        "nickName": ""
+      }]
+    },
+    "attachment": {},
+    "created_at": "",
+    "deleted_at": "0",
+    "client_message_id": "0",
+    "prev_id": "",
+    "referer": "0",
+    "supplement": null,
+    "v": {
+      "notDecoded": false,
+      "origin": "NEWMEM",
+      "c": "10-26 12:32:38",
+      "modifyRevision": 0,
+      "isSingleDefaultEmoticon": false,
+      "defaultEmoticonsCount": 0,
+      "isMine": false,
+      "enc": 31
+    },
+    "thread_id": null,
+    "scope": null
+  }
+}, {
+  "msg": {
+    "feedType": 2,
+    "member": {
+      "userId": ,
+      "nickName": ""
+    }
+  },
+  "room": "",
+  "sender": "",
+  "json": {
+    "_id": "",
+    "id": "",
+    "type": "0",
+    "chat_id": "",
+    "user_id": "",
+    "message": {
+      "feedType": 2,
+      "member": {
+        "userId": ,
+        "nickName": ""
+      }
+    },
+    "attachment": {},
+    "created_at": "",
+    "deleted_at": "0",
+    "client_message_id": "0",
+    "prev_id": "",
+    "referer": "0",
+    "supplement": null,
+    "v": {
+      "notDecoded": false,
+      "origin": "DELMEM",
+      "c": "10-26 12:32:42",
+      "modifyRevision": 0,
+      "isSingleDefaultEmoticon": false,
+      "defaultEmoticonsCount": 0,
+      "isMine": false,
+      "enc": 31
+    },
+    "thread_id": null,
+    "scope": null
+  }
+}]
