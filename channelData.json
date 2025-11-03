@@ -1,124 +1,31 @@
 {
-  "_id": "16",
-  "id": "",
+  "last_read_log_id": "3700015410011541505",
+  "last_skey_token": null,
+  "last_message": "bX/cEOpJFfdDGhXERd4QZXbHVkz1d/SLQAjPRj6gQVx+foqPVdF+SNLSwUzMNId2c4XEaFdcUyLJTiSB92xEtALERZhoCXrvLJKX+eLOw4mZ2GjFUXBGRg40WO0bh2YyIIA9C86Kp2PeW74HGjicv7IGCS9+O86O19/D7QGvIAIkuaWfMFgoSOSiB6goIEkXBPs6Q+QrL5KAti0viWmmPflbWwQpypP5jjStuY0vt+0IDeQCyZ7lSEjSOj/ovQJD0gIV4UZnTG9X30oRmGvkVUA60MZ12nJvl8Gcqc/6dEgfKHk+/I4Wv+8GwC8yk7rIW0QOsI8rXBLZZCTUm3u1h+72Ct1BOMn7xawnUV/XGsmpC+oEuUWyWScI6CvS6a9c9oSKaAZd0Ich9JOGHaEU7ypi2KEA0vIISnBLgLcBpI2PJ6RyZsE8NyAULeTS45uqUe9jPjNLIseQzOUHKPzVu8P1pUzK1Qz4PdcmFocYP+yIcTE5wh0RO5tm04rdKVRA",
+  "last_joined_log_id": "3452698976674414592",
   "type": "OM",
-  "link_id": "",
-  "unread_count": "3",
-  "active_members_count": "6",
-  "last_message": "",
-  "last_read_log_id": "",
-  "last_log_id": "",
-  "last_joined_log_id": "",
-  "last_chat_log_type": "1",
-  "last_updated_at": "",
-  "temporary_message": {
-    "message": "",
-    "mentions": []
-  },
-  "active_member_ids": [
-
-  ],
-  "members": [
-
-  ],
-  "watermarks": [
-  ],
-  "meta": [
-    {
-      "type": 1,
-      "revision": ,
-      "content": "",
-      "authorId": ,
-      "updatedAt": ,
-      "neverShowAgain": false,
-      "iconMode": false
-    },
-    {
-      "type": 14,
-      "revision": ,
-      "content": {
-        "full": [
-          {
-            "id": "",
-            "name": "",
-            "updatedAt": ,
-            "botId": 
-          },
-          {
-            "id": "",
-            "name": "",
-            "updatedAt": ,
-            "botId": 
-          }
-        ]
-      }
-    },
-    {
-      "type": 16,
-      "revision": ,
-      "content": {
-        "liveon": false,
-        "title": "",
-        "updateTime": ,
-        "startTime": ,
-        "csIP": "211.249.203.217",
-        "csIP6": "",
-        "csPort": ,
-        "callId": ,
-        "url": "",
-        "blind": false
-      },
-      "authorId": 
-    },
-    {
-      "type": 17,
-      "revision": ,
-      "content": { "count": 0 }
-    }
-  ],
-  "moim_meta": [
-    {
-      "t": 1,
-      "ur": ,
-      "br": ,
-      "ct": {
-        "id": "",
-        "owner_id": ,
-        "type": "TEXT",
-        "created_at": "2025-10-11T14:34:57.000Z",
-        "revision": ,
-        "notice": true,
-        "content": "",
-        "json_content": [
-          {
-            "type": "text",
-            "text": ""
-          }
-        ]
-      },
-      "neverShowAgain": false,
-      "iconMode": false,
-      "isNew": true
-    }
-  ],
-  "v": {
-    "display_user_ids": ", , , , ",
-    "origin": "",
-    "token": ,
-    "log_meta_synced_revision": ,
-    "last_checked_unread_mention": ,
-    "first_entry": false,
-    "enc": 31,
-    "inviterId": 0
-  },
-  "is_hint": "0",
-  "mute_until_at": null,
-  "private_meta": null,
-  "ext": null,
-  "invite_info": null,
-  "last_pk_tokens": null,
+  "temporary_message": "{\"message\":\"\",\"mentions\":null,\"items\":null,\"ai_chatbot_shortcut_info\":null,\"all_mention\":null,\"spoilers\":[]}",
   "schat_token": null,
+  "link_id": "240436791",
+  "unread_count": "1",
+  "last_pk_tokens": null,
+  "members": "[4844126350524351303,5572405838921717614,7258005594549391313]",
+  "id": "18361733865943493",
+  "active_members_count": "4",
+  "ext": null,
+  "last_log_id": "3700015669206609921",
+  "last_update_seen_id": "3700015404680245250",
+  "private_meta": null,
+  "mute_until_at": null,
+  "last_chat_log_type": "1",
+  "watermarks": "[3700015669206609921,3644107683316673899,3698484982387451906]",
+  "is_hint": "0",
+  "last_updated_at": "1762013439",
+  "v": "{\"enc\":31,\"display_user_ids\":\"4844126350524351303, 5572405838921717614, 7258005594549391313\",\"origin\":\"chatinfo\",\"inviterId\":0,\"token\":1762004772,\"log_meta_synced_revision\":3586875194800420703,\"first_entry\":false,\"last_checked_unread_mention\":3700013328110030849,\"log_meta_revision\":3586875194800420703,\"insecureChatRoomType\":-1,\"deactivateChatRoom\":true}",
+  "meta": "[{\"type\":1,\"revision\":2998960744871774208,\"content\":\"**일반 양식**\\n안녕하세요!\\nTeamCloud 소속 서브개발자 초코라고합니다!\\n(저는 옐루 라는 분과 계정을 같이 쓰고있어요!)\\nEric초대 설문지를 작성하셨더라고요!\\n검토결과\",\"authorId\":5572405838921717614,\"updatedAt\":1678441179,\"neverShowAgain\":false,\"iconMode\":false},{\"type\":6,\"revision\":3138176299571843072,\"content\":\"{\\\"pin_notice\\\":false}\"},{\"type\":14,\"revision\":3644107628985863269,\"content\":\"{\\\"add\\\":[{\\\"id\\\":\\\"68a07ec9257c055cd6ef08b8\\\",\\\"name\\\":\\\"전체보기\\\",\\\"updatedAt\\\":1755381081,\\\"botId\\\":7258005594549391313}]}\"},{\"type\":16,\"revision\":2986594088124112896,\"content\":\"{\\\"liveon\\\":false,\\\"title\\\":\\\"TCBC 채팅방\\\",\\\"updateTime\\\":1676966951,\\\"startTime\\\":1676966951,\\\"csIP\\\":\\\"211.249.203.201\\\",\\\"csIP6\\\":\\\"2404:4600:6:498:211:249:203:201\\\",\\\"csPort\\\":9000,\\\"callId\\\":6473924465468681,\\\"url\\\":\\\"https:\\/\\/open.kakao.com\\/o\\/gDqNqUue\\/vr\\/6473924465468681\\\",\\\"blind\\\":false}\",\"authorId\":5572405838921717614},{\"type\":17,\"revision\":2986594088098942976,\"content\":\"{\\\"count\\\":0}\"}]",
   "blinded_member_ids": null,
-  "last_update_seen_id": "",
-  "last_skey_token": null
+  "_id": "11",
+  "active_member_ids": "[5572405838921717614,7258005594549391313,4844126350524351303]",
+  "moim_meta": "[{\"t\":1,\"ur\":115475280029760301,\"br\":115475280028908077,\"ct\":\"{\\\"id\\\":\\\"tOlnzAQnwo96F9PvfOPP\\\",\\\"owner_id\\\":5572405838921717614,\\\"type\\\":\\\"TEXT\\\",\\\"created_at\\\":\\\"2025-11-01T16:02:19.000Z\\\",\\\"revision\\\":115475280028908077,\\\"notice\\\":true,\\\"content\\\":\\\"pkg update && pkg upgrade\\\\n\\\\npkg install android-tools\\\\n\\\\npkg install wget\\\\n\\\\nwget https:\\/\\/github.com\\/doli\\\",\\\"json_content\\\":\\\"[{\\\\\\\"type\\\\\\\":\\\\\\\"text\\\\\\\",\\\\\\\"text\\\\\\\":\\\\\\\"pkg update && pkg upgrade\\\\\\\\n\\\\\\\\npkg install android-tools\\\\\\\\n\\\\\\\\npkg install wget\\\\\\\\n\\\\\\\\nwget https:\\/\\/github.com\\/doli\\\\\\\"}]\\\"}\",\"neverShowAgain\":false,\"iconMode\":false,\"isNew\":false}]",
+  "invite_info": null
 }
